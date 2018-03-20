@@ -61,12 +61,6 @@ namespace SuperKerbal
             holoEmitterView.SetVisible(!holoEmitterView.IsVisible());
         }
 
-        public void OnGUI()
-        {
-            if (holoEmitterView.IsVisible())
-                holoEmitterView.DrawWindow();
-        }
-
         public override void OnStart(StartState state)
         {
             base.OnStart(state);

@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\KSPDev\KSP_x64_Data\Managed\KSPAssets.dll</HintPath>
     </Reference>
+    <Reference Include="KSPDev_Utils.0.28">
+      <HintPath>..\..\..\..\..\KSPDev\GameData\KIS\Plugins\KSPDev_Utils.0.28.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

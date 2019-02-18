@@ -8,11 +8,11 @@ C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\UnityEngine
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\UnityEngine.UI.dll
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\KSPTrackIR.dll
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\Mono.Cecil.dll
-C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\Ionic.Zip.dll
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\TDx.TDxInput.dll
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\obj\Debug\SuperKerbal.csproj.CoreCompileInputs.cache
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\obj\Debug\SuperKerbal.csproj.CopyComplete
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\obj\Debug\SuperKerbal.dll
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\obj\Debug\SuperKerbal.pdb
+C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\Ionic.Zip.dll
 C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\obj\Debug\SuperKerbal.csprojAssemblyReference.cache
-C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\KSPDev_Utils.0.37.dll
+C:\Projects\KSP\WildBlueIndustries\SuperKerbal\SuperKerbal\bin\Debug\KSPDev_Utils.1.1.dll

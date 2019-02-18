@@ -39,15 +39,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\KSPDev\KSP_x64_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="KIS">
+    <Reference Include="KIS, Version=1.16.6876.37464, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\KSPDev\GameData\KIS\Plugins\KIS.dll</HintPath>
     </Reference>
-    <Reference Include="KSPAssets, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="KSPDev_Utils.0.37, Version=0.37.6763.34473, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\KSPDev\KSP_x64_Data\Managed\KSPAssets.dll</HintPath>
-    </Reference>
-    <Reference Include="KSPDev_Utils.0.28">
-      <HintPath>..\..\..\..\..\KSPDev\GameData\KIS\Plugins\KSPDev_Utils.0.28.dll</HintPath>
+      <HintPath>..\..\..\..\..\KSPDev\GameData\KIS\Plugins\KSPDev_Utils.0.37.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,6 +72,17 @@
     <Compile Include="Utilities\WindowUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Projects\KSP\WildBlueIndustries\pdb2mdb\pdb2mdb.exe" "$(TargetFileName)"
+xcopy /Y "$(TargetPath)" "C:\KSPDev\GameData\WildBlueIndustries\KerbalKISItems\plugins\"﻿
+xcopy /Y "$(TargetDir)$(TargetName).pdb" "C:\KSPDev\GameData\WildBlueIndustries\KerbalKISItems\plugins\"
+xcopy /Y "$(TargetDir)$(TargetName).dll.mdb" "C:\KSPDev\GameData\WildBlueIndustries\KerbalKISItems\plugins\"
+xcopy /Y "$(TargetDir)$(TargetName).dll" "C:\KSPDev\GameData\WildBlueIndustries\KerbalKISItems\plugins\"
+
+xcopy /Y  "C:\KSPDev\GameData\WildBlueIndustries\KerbalKISItems\SuperKerbal.version" "C:\Projects\KSP\WildBlueIndustries\SuperKerbal\Notes\"
+
+del "C:\Projects\KSP\WildBlueIndustries\SuperKerbal\GameData\WildBlueIndustries\KerbalKISItems\MiniAVC.xml"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

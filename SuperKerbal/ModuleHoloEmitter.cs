@@ -40,12 +40,11 @@ namespace SuperKerbal
         public bool isHighlighted = false;
 
         [KSPField(isPersistant = true)]
-        public bool showHelmet = true;
+        public Color highlightColor = new Color(0, 191, 243);
 
         protected ExperienceSystemConfig expSysConfig;
-        protected KIS.ModuleKISInventory inventory;
-        protected HoloEmitterView holoEmitterView = new HoloEmitterView();
-        protected Color highlightColor = new Color(0, 191, 243);
+        protected HoloEmitterView holoEmitterView;
+        protected KerbalEVA kerbalEVA;
 
         [KSPEvent(guiName = "Activate Emitter", guiActive = true)]
         public void ActivateEmitter()
@@ -57,8 +56,23 @@ namespace SuperKerbal
             holoEmitterView.crewMember = crewMember;
             holoEmitterView.currentTraitName = currentTraitName;
             holoEmitterView.isHighlighted = isHighlighted;
-            holoEmitterView.showHelmet = showHelmet;
-            holoEmitterView.SetVisible(!holoEmitterView.IsVisible());
+            holoEmitterView.highlightColor = this.highlightColor;
+            holoEmitterView.kerbalEVA = this.kerbalEVA;
+            holoEmitterView.part = this.part;
+            if (holoEmitterView.IsVisible())
+                holoEmitterView.SetVisible(false);
+            else
+                holoEmitterView.SetVisible(true);
+        }
+
+        public void OnGUI()
+        {
+            if (!HighLogic.LoadedSceneIsFlight)
+                return;
+            if (!holoEmitterView.IsVisible())
+                return;
+
+            holoEmitterView.DrawWindow();
         }
 
         public override void OnStart(StartState state)
@@ -67,17 +81,18 @@ namespace SuperKerbal
             if (HighLogic.LoadedSceneIsFlight == false)
                 return;
 
-            //Setup the inventory object.
-            inventory = this.part.vessel.rootPart.FindModuleImplementing<KIS.ModuleKISInventory>();
-            
+            //Get kerbalEVA
+            this.kerbalEVA = this.part.vessel.FindPartModuleImplementing<KerbalEVA>();
+
             //Set up the system config
             expSysConfig = new ExperienceSystemConfig();
             expSysConfig.LoadTraitConfigs();
 
             //Setup view
+            holoEmitterView = new HoloEmitterView();
             holoEmitterView.toggleHighlight = ToggleHighlight;
             holoEmitterView.setTrait = SetTrait;
-            holoEmitterView.setHelmetVisible = SetHelmetVisible;
+            holoEmitterView.setHighlightColor = SetHighlightColor;
 
             //Set current trait if needed
             if (string.IsNullOrEmpty(currentTraitName))
@@ -91,7 +106,6 @@ namespace SuperKerbal
             //Set highlighting and such
             ToggleHighlight(isHighlighted);
             SetTrait(currentTraitName);
-            SetHelmetVisible(showHelmet);
         }
 
         public override void OnUpdate()
@@ -105,24 +119,12 @@ namespace SuperKerbal
                 this.part.vessel.rootPart.Highlight(highlightColor);
         }
 
-        public void SetHelmetVisible(bool isVisible)
+        public void SetHighlightColor(Color color)
         {
-            if (isVisible == showHelmet)
-                return;
+            this.highlightColor = color;
 
-            Vessel vessel = FlightGlobals.ActiveVessel;
-            ProtoCrewMember crewMember = vessel.GetVesselCrew()[0];
-
-            showHelmet = isVisible;
-
-            //Setup inventory object if needed.
-            if (inventory == null)
-                inventory = this.part.vessel.rootPart.FindModuleImplementing<KIS.ModuleKISInventory>();
-
-            if (inventory != null)
-                inventory.SetHelmet(isVisible);
-            else
-                Debug.Log("[ModuleHoloEmitter] - inventory object is null");
+            if (isHighlighted)
+                this.part.vessel.rootPart.Highlight(highlightColor);
         }
 
         public void ToggleHighlight(bool isHighlighted)
@@ -150,17 +152,6 @@ namespace SuperKerbal
 
             //Set the kerbal experience trait
             currentTraitName = traitName;
-
-            //Setup inventory object if needed.
-            if (inventory == null)
-                inventory = this.part.vessel.rootPart.FindModuleImplementing<KIS.ModuleKISInventory>();
-
-            //Set new trait
-            KerbalRoster.SetExperienceTrait(crewMember, traitName);
-            if (inventory != null)
-                inventory.kerbalTrait = traitName;
-            else
-                Debug.Log("[ModuleHoloEmitter] - inventory object is null");
         }
     }
 }
